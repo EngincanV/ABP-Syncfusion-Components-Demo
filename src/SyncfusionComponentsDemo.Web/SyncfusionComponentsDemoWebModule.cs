@@ -37,6 +37,9 @@ using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.UI;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
+using Volo.Abp.AspNetCore.Mvc.UI.Components.LayoutHook;
+using SyncfusionComponentsDemo.Web.Components.Syncfusion.Style;
+using SyncfusionComponentsDemo.Web.Components.Syncfusion.Script;
 
 namespace SyncfusionComponentsDemo.Web
 {
@@ -75,6 +78,17 @@ namespace SyncfusionComponentsDemo.Web
         {
             var hostingEnvironment = context.Services.GetHostingEnvironment();
             var configuration = context.Services.GetConfiguration();
+
+            //Register Syncfusion license
+            var licenseKey = configuration["Syncfusion:LicenseKey"].ToString();
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(licenseKey: licenseKey);
+
+            Configure<AbpLayoutHookOptions>(options =>
+            {
+                options.Add(LayoutHooks.Head.Last, typeof(SyncfusionStyleComponent));
+
+                options.Add(LayoutHooks.Body.Last, typeof(SyncfusionScriptComponent));
+            });
 
             ConfigureUrls(configuration);
             ConfigureBundles();
