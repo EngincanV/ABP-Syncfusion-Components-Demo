@@ -1,0 +1,13 @@
+﻿@page
+@model SyncfusionComponentsDemo.Web.Pages.Todos
+
+@if (!Model.TodoItems.IsNullOrEmpty())
+{
+    <ejs-grid id="Grid" dataSource="@Model.TodoItems">
+        <e-grid-columns>
+            <e-grid-column field="Id" headerText="Todo ID" width="120"></e-grid-column>
+            <e-grid-column field="Title" headerText="Title"  width="150"></e-grid-column> 
+            <e-grid-column field="IsCompleted" headerText="IsCompleted" width="130"></e-grid-column>      
+        </e-grid-columns>
+    </ejs-grid>
+}
